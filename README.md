@@ -80,6 +80,7 @@ make
 | `exit`                | Exit simulator             |
 
 ## Architecture
+```
 simpleOS/
 ├── main.c        # Kernel entry point
 ├── process.c     # Process table & scheduler
@@ -88,8 +89,8 @@ simpleOS/
 ├── syscall.c     # System call layer
 ├── shell.c       # Command interface
 ├── *.h           # Headers
-├── Makefile      # Build system
-
+└── Makefile      # Build system
+```
 ## How It Works
 The system initializes:
 Process table
