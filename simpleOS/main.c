@@ -21,6 +21,5 @@ int main(void) {
     printf("Type 'help' for available commands.\n\n");
 
     run_shell();
-
     return 0;
 }

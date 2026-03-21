@@ -30,7 +30,6 @@ int allocate_pages(int num_pages) {
             start = -1;
         }
     }
-
     return -1;
 }
 
@@ -56,7 +55,6 @@ void print_memory_status(void) {
     printf("Total Pages: %d\n", MAX_PAGES);
     printf("Used Pages : %d\n", used);
     printf("Free Pages : %d\n", free_count);
-
     printf("Bitmap     : ");
     for (int i = 0; i < MAX_PAGES; i++) {
         printf("%d", memory_bitmap[i]);

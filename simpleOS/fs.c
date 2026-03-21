@@ -8,7 +8,6 @@ void init_fs(void) {
     for (int i = 0; i < MAX_FILES; i++) {
         files[i].used = 0;
     }
-
     write_file("readme.txt", "Welcome to SimpleOS");
     write_file("notes.txt", "This is a kernel simulation.");
 }
@@ -38,7 +37,6 @@ int write_file(const char *filename, const char *content) {
             files[i].used = 1;
             strncpy(files[i].name, filename, MAX_FILENAME - 1);
             files[i].name[MAX_FILENAME - 1] = '\0';
-
             strncpy(files[i].content, content, MAX_FILE_CONTENT - 1);
             files[i].content[MAX_FILE_CONTENT - 1] = '\0';
             files[i].size = (int)strlen(files[i].content);

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include "shell.h"
 #include "process.h"
 #include "memory.h"
@@ -9,16 +8,16 @@
 
 static void print_help(void) {
     printf("\nAvailable commands:\n");
-    printf("help                 - show commands\n");
-    printf("ps                   - list processes\n");
-    printf("sched                - run one scheduler tick\n");
-    printf("mem                  - show memory bitmap status\n");
-    printf("ls                   - list files\n");
-    printf("cat <file>           - display file contents directly from file system\n");
-    printf("read <file>          - read file using simulated system calls\n");
-    printf("write <file> <text>  - write text to file\n");
-    printf("run                  - create a demo process\n");
-    printf("exit                 - quit simulator\n\n");
+    printf("help - show commands\n");
+    printf("ps - list processes\n");
+    printf("sched - run one scheduler tick\n");
+    printf("mem - show memory bitmap status\n");
+    printf("ls - list files\n");
+    printf("cat <file> - display file contents directly from file system\n");
+    printf("read <file> - read file using simulated system calls\n");
+    printf("write <file> <text> - write text to file\n");
+    printf("run - create a demo process\n");
+    printf("exit - quit simulator\n\n");
 }
 
 void run_shell(void) {
@@ -26,7 +25,6 @@ void run_shell(void) {
 
     while (1) {
         printf("simpleos> ");
-
         if (!fgets(input, sizeof(input), stdin)) {
             break;
         }
@@ -35,34 +33,27 @@ void run_shell(void) {
 
         if (strcmp(input, "help") == 0) {
             print_help();
-        }
-        else if (strcmp(input, "ps") == 0) {
+        } else if (strcmp(input, "ps") == 0) {
             list_processes();
-        }
-        else if (strcmp(input, "sched") == 0) {
+        } else if (strcmp(input, "sched") == 0) {
             run_scheduler_tick();
-        }
-        else if (strcmp(input, "mem") == 0) {
+        } else if (strcmp(input, "mem") == 0) {
             print_memory_status();
-        }
-        else if (strcmp(input, "ls") == 0) {
+        } else if (strcmp(input, "ls") == 0) {
             list_files();
-        }
-        else if (strncmp(input, "cat ", 4) == 0) {
+        } else if (strncmp(input, "cat ", 4) == 0) {
             char *filename = input + 4;
             const char *data = read_file(filename);
-
             if (data) {
                 printf("%s\n", data);
             } else {
                 printf("cat: file '%s' not found\n", filename);
             }
-        }
-        else if (strncmp(input, "read ", 5) == 0) {
+        } else if (strncmp(input, "read ", 5) == 0) {
             char *filename = input + 5;
             char buffer[128];
-
             int fd = sys_open(filename);
+
             if (fd < 0) {
                 printf("read: failed to open file '%s'\n", filename);
                 continue;
@@ -77,10 +68,8 @@ void run_shell(void) {
 
             buffer[n] = '\0';
             printf("read returned %d bytes: %s\n", n, buffer);
-
             sys_close(fd);
-        }
-        else if (strncmp(input, "write ", 6) == 0) {
+        } else if (strncmp(input, "write ", 6) == 0) {
             char *rest = input + 6;
             char *space = strchr(rest, ' ');
 
@@ -98,8 +87,7 @@ void run_shell(void) {
             } else {
                 printf("write: failed to update '%s'\n", filename);
             }
-        }
-        else if (strcmp(input, "run") == 0) {
+        } else if (strcmp(input, "run") == 0) {
             int start = allocate_pages(2);
             if (start == -1) {
                 printf("Not enough memory to create process\n");
@@ -109,19 +97,15 @@ void run_shell(void) {
                     printf("Process table full\n");
                     free_pages(start, 2);
                 } else {
-                    printf("Created process PID %d using pages %d-%d\n",
-                           pid, start, start + 1);
+                    printf("Created process PID %d using pages %d-%d\n", pid, start, start + 1);
                 }
             }
-        }
-        else if (strcmp(input, "exit") == 0) {
+        } else if (strcmp(input, "exit") == 0) {
             printf("Exiting SimpleOS simulator.\n");
             break;
-        }
-        else if (strlen(input) == 0) {
-            // do nothing for empty input
-        }
-        else {
+        } else if (strlen(input) == 0) {
+            /* do nothing */
+        } else {
             printf("Unknown command. Type 'help'.\n");
         }
     }

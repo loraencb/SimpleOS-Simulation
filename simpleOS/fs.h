@@ -1,7 +1,9 @@
 #ifndef FS_H
 #define FS_H
 
-#include "common.h"
+#define MAX_FILES 10
+#define MAX_FILENAME 32
+#define MAX_FILE_CONTENT 256
 
 typedef struct {
     int used;

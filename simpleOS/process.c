@@ -1,4 +1,4 @@
-memory.#include <stdio.h>
+#include <stdio.h>
 #include <string.h>
 #include "process.h"
 
@@ -41,7 +41,6 @@ int create_process(const char *name, int pages_needed) {
 void list_processes(void) {
     printf("\nPID   NAME                 STATE       PAGES\n");
     printf("----  -------------------  ----------  -----\n");
-
     for (int i = 0; i < MAX_PROCESSES; i++) {
         if (process_table[i].used) {
             printf("%-4d  %-19s  %-10s  %-5d\n",
@@ -57,7 +56,8 @@ void list_processes(void) {
 void run_scheduler_tick(void) {
     int found = 0;
 
-    if (current_index >= 0 && process_table[current_index].used &&
+    if (current_index >= 0 &&
+        process_table[current_index].used &&
         process_table[current_index].state == RUNNING) {
         process_table[current_index].state = READY;
     }
