@@ -2,7 +2,7 @@
 #include <string.h>
 #include "fs.h"
 
-static FileEntry files[MAX_FILES];
+FileEntry files[MAX_FILES];
 
 void init_fs(void) {
     for (int i = 0; i < MAX_FILES; i++) {
