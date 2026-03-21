@@ -40,24 +40,31 @@ Use Ubuntu via WSL:
 
 ```bash
 wsl --install
+```
+```bash
 wsl -d Ubuntu
+```
 
 ## Installation & Run
 1. Navigate to the project
 ```bash
 cd /mnt/c/Users/YOUR_USERNAME/path/to/SimpleOS-Simulation/simpleOS
-
+```
 2. Install dependencies (first time only)
 ```bash
 sudo apt update
+```
 ```bash
 sudo apt install build-essential -y
+```
 3. Build the project
 ```bash
 make
+```
 4. Run the simulator
 ```bash
 ./simpleos
+```
 
 | Command               | Description                |
 | --------------------- | -------------------------- |
