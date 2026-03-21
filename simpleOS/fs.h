@@ -10,6 +10,8 @@ typedef struct {
     int size;
 } FileEntry;
 
+extern FileEntry files[MAX_FILES];
+
 void init_fs(void);
 void list_files(void);
 int write_file(const char *filename, const char *content);
